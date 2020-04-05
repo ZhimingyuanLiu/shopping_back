@@ -1,8 +1,8 @@
+require('dotenv').config();
 const User = require('../models/user');
-const stripe = require('stripe')('sk_test_KVw39oqcg2ABshtS2kPxTR8900DndZ1iGX');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const uuid = require('node-uuid');
 
-require('dotenv').config();
 exports.generateToken = async (req, res) => {
   console.log('testing');
   console.log('Request:', req.body);
@@ -40,12 +40,10 @@ exports.generateToken = async (req, res) => {
         idempotency_key,
       }
     );
-    console.log('Charge:', { charge });
     status = 'success';
+    res.json({ error, status });
   } catch (error) {
-    console.error('Error:', error);
     status = 'failure';
+    res.json({ error, status });
   }
-
-  res.json({ error, status });
 };
