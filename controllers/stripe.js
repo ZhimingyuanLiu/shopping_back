@@ -40,8 +40,9 @@ exports.generateToken = async (req, res) => {
         idempotency_key,
       }
     );
+
     status = 'success';
-    res.json({ error, status });
+    res.json({ charge, status });
   } catch (error) {
     status = 'failure';
     res.json({ error, status });

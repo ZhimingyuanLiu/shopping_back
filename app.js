@@ -5,6 +5,9 @@ const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const StripetRoutes = require('./routes/stripe');
+
+const orderRoutes = require('./routes/order');
+
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -38,6 +41,8 @@ app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 app.use('/api', StripetRoutes);
+app.use('/api', orderRoutes);
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log('Server is running on port 8000');
